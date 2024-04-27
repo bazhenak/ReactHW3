@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 
-const stopTimer = 10
 const Timer = () => {
 
     const [counter, setCounter] = useState(0);
@@ -8,7 +7,8 @@ const Timer = () => {
     useEffect(() => {
         const intervalId = setInterval( () => {
             setCounter(counter => counter + 1);
-            if (counter >= stopTimer) {clearInterval(intervalId);
+            if (counter >= stopTimer) {
+                return clearInterval(intervalId);
             }
         }, 1000);
 
