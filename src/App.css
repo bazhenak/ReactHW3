@@ -87,11 +87,18 @@
   color: ivory;
 }
 
+.timer {
+  padding: 20px 0 20px 0;
+  background-color: mediumslateblue;
+  margin: 100px 400px 0 400px;
+  color: ivory;
+}
+
 .number {
   display: inline-block;
   box-sizing: border-box;
   padding: 0 25px;
-  margin: 50px 15px 15px 0;
+  margin: 0 5px 5px 0;
   outline: none;
   border: 1px solid #fff;
   border-radius: 50px;

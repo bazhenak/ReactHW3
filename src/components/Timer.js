@@ -1,31 +1,48 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
+// import ReactDOM from "react-dom/client";
+// import { useInterval } from 'usehooks-ts'
 
-const Timer = () => {
+function Timer() {
 
-    const [counter, setCounter] = useState(0);
+    const [count, setCount] = useState(1);
     const [delay, setDelay] = useState(1000);
 
-    useEffect(() => {
-        const intervalId = setInterval( () => {
-            setCounter(counter => counter + 1);
-        }, delay);
-        function handleDelayChange(e) {
-            setDelay(Number(e.target.value));
-        }
 
-
-    //     return () => clearInterval(intervalId);
-    //
-     }, []);
-
+    useInterval(() => {
+        setCount(count => count + 1);
+    }, delay);
+    function handleDelayChange(e) {
+        // console.log(e)
+        setDelay(Number(e.target.value));
+    }
 
     return (
         <div>
-            <p className={"counter"}>Timer: {counter}</p>
-            <input value={delay} type={"number"} id={"form"} className={"number"} onChange={handleDelayChange}></input>
-
+            <p className={"timer"}>Timer: {count}</p>
+            <h3>Set time of delay here:</h3>
+            <input value={delay} type={"number"} id={"form"} className={"number"}
+                   onChange={handleDelayChange}></input>
         </div>
     );
-};
+}
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        function func() {
+            savedCallback.current();
+        }
+        if (delay !== null) {
+            let id = setInterval(func, delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
+}
+
 export default Timer;
 
